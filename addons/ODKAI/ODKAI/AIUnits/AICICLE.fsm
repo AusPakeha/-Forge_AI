@@ -1,0 +1,957 @@
+/*%FSM<COMPILE "C:\Program Files (x86)\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, AICIRLE">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"START",0,250,-18415.705078,-7827.361816,-18325.705078,-7777.361816,0.000000,"START"};
+item1[] = {"TRUE",8,218,-18224.390625,-7821.679199,-18137.142578,-7779.761719,0.000000,"TRUE"};
+item2[] = {"AICIRCLE",2,250,-18091.007813,-7799.558594,-18001.007813,-7749.558594,0.000000,"AICIRCLE"};
+item3[] = {"EXIT_CONDITION_",4,218,-18258.738281,-7755.056641,-18168.738281,-7705.057617,6.000000,"EXIT" \n "CONDITION?" \n ""};
+item4[] = {"FSM_END",1,250,-18412.947266,-7755.293457,-18322.947266,-7705.289551,0.000000,"FSM" \n "END"};
+item5[] = {"WAITING_TIME",2,250,-17644.841797,-7854.697266,-17554.841797,-7804.697266,0.000000,"WAITING" \n "TIME"};
+item6[] = {"TIME_ELAPSED",4,218,-18069.546875,-7968.042969,-17979.546875,-7918.042969,0.000000,"TIME" \n "ELAPSED"};
+item7[] = {"INFANTRY_",4,218,-18322.072266,-7667.661133,-18222.072266,-7617.661621,4.000000,"INFANTRY?"};
+item8[] = {"INFANTRY",2,4346,-18813.111328,-7484.250488,-18738.880859,-7452.596680,0.000000,"INFANTRY"};
+item9[] = {"LEADER_",4,218,-19115.324219,-7493.535156,-19025.324219,-7443.535156,3.000000,"LEADER?"};
+item10[] = {"LEADER",2,250,-19117.183594,-7384.137695,-19020.066406,-7336.158691,0.000000,"LEADER"};
+item11[] = {"TRUE",8,218,-17644.822266,-7530.204590,-17557.572266,-7488.287598,0.000000,"TRUE"};
+item12[] = {"LAND_VEHICLES_",4,218,-18273.847656,-7610.580566,-18173.847656,-7560.580566,3.000000,"LAND" \n "VEHICLES?"};
+item13[] = {"AUTONOMOUS_",4,218,-17949.609375,-7870.045410,-17849.609375,-7820.045410,1.000000,"AUTONOMOUS?"};
+item14[] = {"AIR_VEHICLES_",4,218,-18031.439453,-7626.861816,-17941.439453,-7576.861816,2.000000,"AIR" \n "VEHICLES?"};
+item15[] = {"IN_COMBAT_",4,218,-19114.968750,-7286.107422,-19024.968750,-7236.107422,1.000000,"IN COMBAT?"};
+item16[] = {"LEADER_COMBAT__D",2,250,-19114.650391,-7213.682129,-19024.650391,-7163.682129,0.000000,"LEADER" \n "COMBAT " \n "DECISION"};
+item17[] = {"SUPPRESSION",2,250,-18783.337891,-7100.790039,-18693.337891,-7050.790039,0.000000,"SUPPRESSION"};
+item18[] = {"INSIDE_BUILDING",4,218,-18933.099609,-7450.854004,-18843.099609,-7400.854004,1.000000,"INSIDE" \n "BUILDING?"};
+item19[] = {"INSIDE__BUILDING",2,250,-18933.185547,-7330.434082,-18843.185547,-7280.434082,0.000000,"INSIDE " \n "BUILDING"};
+item20[] = {"",7,210,-17605.224609,-6968.145508,-17597.224609,-6960.145508,0.000000,""};
+item21[] = {"",7,210,-18808.240234,-7202.966797,-18800.240234,-7194.966797,0.000000,""};
+item22[] = {"REQUEST_SUPPRESS",4,218,-18783.988281,-7211.023438,-18693.988281,-7161.023438,1.000000,"REQUEST" \n "SUPPRESSION"};
+item23[] = {"CHECK_LOADOUT",4,218,-18936.669922,-7580.574707,-18846.669922,-7530.574707,4.000000,"CHECK" \n "LOADOUT"};
+item24[] = {"COMBAT_",4,218,-18716.582031,-7452.344238,-18626.582031,-7402.344238,2.000000,"COMBAT?"};
+item25[] = {"COMBAT",2,250,-18718.564453,-7375.998047,-18628.564453,-7325.998047,0.000000,"COMBAT"};
+item26[] = {"IN_COMBAT",4,218,-18598.156250,-7374.640137,-18508.156250,-7324.640137,2.000000,"IN" \n "COMBAT"};
+item27[] = {"LAND_VEHICLES",2,250,-18268.267578,-7529.101074,-18178.267578,-7479.101074,0.000000,"LAND" \n "VEHICLES"};
+item28[] = {"COMMANDER_COMBAT",4,218,-18267.593750,-7448.257813,-18177.593750,-7398.257813,1.000000,"COMMANDER" \n "COMBAT?"};
+item29[] = {"COMBAT_1",2,250,-18267.101563,-7362.669434,-18177.101563,-7312.669434,0.000000,"COMBAT"};
+item30[] = {"SUPPRESSION_",4,218,-18237.968750,-7273.646484,-18147.968750,-7223.646484,1.000000,"SUPPRESSION?"};
+item31[] = {"SUPPRESSION_1",2,250,-18239.412109,-7182.826172,-18149.412109,-7132.826172,0.000000,"SUPPRESSION"};
+item32[] = {"AIR__VEHICLES",2,250,-18031.476563,-7530.199707,-17941.476563,-7480.199707,0.000000,"AIR " \n "VEHICLES"};
+item33[] = {"COMMANDER_COMBAT",4,218,-18032.187500,-7448.520508,-17942.187500,-7398.520508,1.000000,"COMMANDER" \n "COMBAT?"};
+item34[] = {"COMBAT_2",2,250,-18032.425781,-7364.531250,-17942.425781,-7314.531250,0.000000,"COMBAT"};
+item35[] = {"SUPPRESSION_",4,218,-17976.662109,-7277.894531,-17886.662109,-7227.894531,2.000000,"SUPPRESSION?"};
+item36[] = {"SUPPRESSION_2",2,250,-17976.691406,-7177.013184,-17886.691406,-7127.013184,0.000000,"SUPPRESSION"};
+item37[] = {"FALSE",4,218,-18101.458984,-7279.986816,-18011.458984,-7229.986816,1.000000,"FALSE"};
+item38[] = {"NONE",2,250,-18100.687500,-7178.067871,-18010.687500,-7128.067871,0.000000,"NONE"};
+item39[] = {"",7,210,-18807.728516,-6968.968262,-18799.728516,-6960.967773,0.000000,""};
+item40[] = {"",7,210,-18339.318359,-6969.002441,-18331.318359,-6961.002441,0.000000,""};
+item41[] = {"",7,210,-18198.625000,-6968.713867,-18190.625000,-6960.713867,0.000000,""};
+item42[] = {"",7,210,-18135.599609,-7507.860352,-18127.599609,-7499.860352,0.000000,""};
+item43[] = {"",7,210,-18134.208984,-6969.390137,-18126.208984,-6961.390137,0.000000,""};
+item44[] = {"",7,210,-18135.535156,-7342.413574,-18127.535156,-7334.413086,0.000000,""};
+item45[] = {"",7,210,-18063.798828,-6967.763672,-18055.798828,-6959.763184,0.000000,""};
+item46[] = {"",7,210,-17941.300781,-6966.525879,-17933.300781,-6958.525879,0.000000,""};
+item47[] = {"",7,210,-18882.125000,-6968.966309,-18874.125000,-6960.966309,0.000000,""};
+item48[] = {"REQUEST_SUPPRESS",4,218,-18922.941406,-7135.413086,-18832.941406,-7085.413086,1.000000,"REQUEST" \n "SUPPRESSION"};
+item49[] = {"SUPPRES",2,250,-18904.445313,-7051.856445,-18851.457031,-7019.833984,0.000000,"SUPPRES"};
+item50[] = {"",7,210,-18741.603516,-6968.824707,-18733.603516,-6960.824707,0.000000,""};
+item51[] = {"",7,210,-18466.650391,-6968.596191,-18458.650391,-6960.596191,0.000000,""};
+item52[] = {"NO_VAR_",4,218,-17945.630859,-7786.494141,-17845.630859,-7736.494141,5.000000,"NO VAR?"};
+item53[] = {"____FAKE____",9,2000764214,0.000000,0.000000,0.000000,0.000000,0.000000,"____FAKE____"};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,3};
+link3[] = {2,7};
+link4[] = {2,11};
+link5[] = {2,12};
+link6[] = {2,13};
+link7[] = {2,14};
+link8[] = {2,52};
+link9[] = {3,4};
+link10[] = {5,6};
+link11[] = {6,2};
+link12[] = {7,8};
+link13[] = {8,9};
+link14[] = {8,18};
+link15[] = {8,21};
+link16[] = {8,23};
+link17[] = {8,24};
+link18[] = {9,10};
+link19[] = {10,15};
+link20[] = {10,21};
+link21[] = {11,5};
+link22[] = {12,27};
+link23[] = {13,5};
+link24[] = {14,32};
+link25[] = {15,16};
+link26[] = {16,21};
+link27[] = {16,48};
+link28[] = {17,50};
+link29[] = {18,19};
+link30[] = {19,21};
+link31[] = {20,11};
+link32[] = {21,39};
+link33[] = {22,17};
+link34[] = {23,8};
+link35[] = {24,25};
+link36[] = {25,21};
+link37[] = {25,22};
+link38[] = {25,26};
+link39[] = {26,25};
+link40[] = {27,28};
+link41[] = {27,42};
+link42[] = {28,29};
+link43[] = {29,30};
+link44[] = {29,44};
+link45[] = {30,31};
+link46[] = {31,41};
+link47[] = {32,33};
+link48[] = {32,42};
+link49[] = {33,34};
+link50[] = {34,35};
+link51[] = {34,44};
+link52[] = {35,36};
+link53[] = {36,46};
+link54[] = {37,38};
+link55[] = {38,45};
+link56[] = {39,50};
+link57[] = {40,41};
+link58[] = {41,43};
+link59[] = {42,44};
+link60[] = {43,45};
+link61[] = {44,43};
+link62[] = {45,46};
+link63[] = {46,20};
+link64[] = {47,39};
+link65[] = {48,49};
+link66[] = {49,47};
+link67[] = {50,51};
+link68[] = {51,40};
+link69[] = {52,5};
+link70[] = {53,37};
+globals[] = {0.000000,0,0,0,0,640,480,2,257,6316128,1,-19321.861328,-17894.869141,-6685.960938,-7790.479492,739,884,1};
+window[] = {2,-1,-1,-32000,-32000,853,130,1507,130,3,757};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "AICIRLE";
+        class States
+        {
+                /*%FSM<STATE "START">*/
+                class START
+                {
+                        name = "START";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"if ( leader _this isEqualTo _this ) then { _this call ODKAI_InitHashGroup; };" \n
+                         "" \n
+                         "_this call ODKAI_AI_Init;" \n
+                         "" \n
+                         "[ _this , ""FSM"" , _thisFSM ] call ODKAI_SetUnitMemory;" \n
+                         "_LastTimeCheck_LeaderPos = diag_ticktime + ( 60 + random 100 );" \n
+                         "_RandomTick_LeaderPos = 0;" \n
+                         "_LastTimeCheckLoadout = diag_ticktime; //da rimettere random" \n
+                         "_RandomTickCheckLoadout = 0;" \n
+                         "_LastTimeInCombat = diag_ticktime + ( random 10 );" \n
+                         "_RandomTickInCombat = 0;" \n
+                         "_isAutonomous =  tolower getText (configfile >> ""CfgVehicles"" >> typeOf (vehicle _this) >> ""vehicleClass"") isEqualTo ""autonomous"";" \n
+                         "" \n
+                         "private _Group = _this;" \n
+                         "" \n
+                         "{" \n
+                         "	if !(isPlayer _x) then" \n
+                         "	{" \n
+                         "		if !ODK_USESTATICS exitWith {}; " \n
+                         "		_x disableAI ""RADIOPROTOCOL"";" \n
+                         "" \n
+                         "	};" \n
+                         "} foreach (units _Group);" \n
+                         "" \n
+                         "_onFoot = isNull objectParent _this;" \n
+                         "if _onFoot then {	" \n
+                         "		if ODK_SECONDCHANCEWEST then { _this call ODKAI_WEST };" \n
+                         "		if ODK_SECONDCHANCEEAST then { _this call ODKAI_EAST };	" \n
+                         "		if ODK_SECONDCHANCEINDEPENDENT then { _this call ODKAI_INDEPEND };	" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="AICIRCLE";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "AICIRCLE">*/
+                class AICIRCLE
+                {
+                        name = "AICIRCLE";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         "_checkVARGroup = group _this getvariable ""ODKAI_HashMap"";" \n
+                         "_checkVARUnit = _this getvariable ""ODKAI_HashMapUnit"";" \n
+                         "" \n
+                         "_inSuppression = false;" \n
+                         "_IsLeader = leader _this isEqualTo _this;" \n
+                         "_Enemy = ( _this findNearestEnemy getposATL _this );" \n
+                         "_In_Combat = !isNull _Enemy;" \n
+                         "_onFoot = isNull objectParent _this;" \n
+                         "_isAir = ( typeOf ( vehicle _this ) ) isKindOf ""AIR"";" \n
+                         "_isLandVehicle = ( typeOf ( vehicle _this ) ) isKindOf ""LandVehicle"";	" \n
+                         "_this call ODKAI_ArmedVehNearby;	" \n
+                         "_this call ODKAI_ReturnFormation;" \n
+                         "if _IsLeader then {	" \n
+                         "	_this call ODKAI_ChangeBehaviour; 	" \n
+                         "" \n
+                         "			" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "EXIT_CONDITION_">*/
+                                class EXIT_CONDITION_
+                                {
+                                        itemno = 3;
+                                        priority = 6.000000;
+                                        to="FSM_END";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"( IsPlayer _this ) OR " \n
+                                         "!( missionnamespace getvariable [ ""ODK_ActivateAI"" , true ] ) OR" \n
+                                         "! local _this OR" \n
+                                         "! alive _this"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "NO_VAR_">*/
+                                class NO_VAR_
+                                {
+                                        itemno = 52;
+                                        priority = 5.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"( isnil ""_checkVARGroup"" ) OR" \n
+                                         "( isnil ""_checkVARUnit"" )"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "INFANTRY_">*/
+                                class INFANTRY_
+                                {
+                                        itemno = 7;
+                                        priority = 4.000000;
+                                        to="INFANTRY";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_onFoot"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "LAND_VEHICLES_">*/
+                                class LAND_VEHICLES_
+                                {
+                                        itemno = 12;
+                                        priority = 3.000000;
+                                        to="LAND_VEHICLES";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_isLandVehicle" \n
+                                         ""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "AIR_VEHICLES_">*/
+                                class AIR_VEHICLES_
+                                {
+                                        itemno = 14;
+                                        priority = 2.000000;
+                                        to="AIR__VEHICLES";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_isAir"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "AUTONOMOUS_">*/
+                                class AUTONOMOUS_
+                                {
+                                        itemno = 13;
+                                        priority = 1.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_isAutonomous" \n
+                                         ""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_this call ODKAI_Autonomous;" \n
+                                         "_stopTime = 1;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "FSM_END">*/
+                class FSM_END
+                {
+                        name = "FSM_END";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "ODKAI_UnitControlled = ODKAI_UnitControlled - [ _this ];" \n
+                         "	" \n
+                         "if ( ( isUAVConnected ( vehicle _this ) ) AND" \n
+                         "	  !( ( vehicle _this ) getvariable [ ""odkai_UAVDisabled"" , false ] ) " \n
+                         ") then {	" \n
+                         "	( vehicle _this ) setVariable [ ""odkai_UAVDisabled"" , true , true ];	" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "WAITING_TIME">*/
+                class WAITING_TIME
+                {
+                        name = "WAITING_TIME";
+                        itemno = 5;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "TIME_ELAPSED">*/
+                                class TIME_ELAPSED
+                                {
+                                        itemno = 6;
+                                        priority = 0.000000;
+                                        to="AICIRCLE";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"if _inSuppression then {" \n
+                                         "" \n
+                                         "" \n
+                                         "};"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "INFANTRY">*/
+                class INFANTRY
+                {
+                        name = "INFANTRY";
+                        itemno = 8;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         "_this call ODKAI_SeeLaser;	" \n
+                         "_this call ODKAI_AUTOMEDIC;	" \n
+                         "_this call ODKAI_LaserDesignationMan;" \n
+                         "" \n
+                         "" \n
+                         "		if ( _this distance2d _Enemy > 2000 ) then { " \n
+                         "			_this setUnitPos ""up"";" \n
+                         "			};" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "CHECK_LOADOUT">*/
+                                class CHECK_LOADOUT
+                                {
+                                        itemno = 23;
+                                        priority = 4.000000;
+                                        to="INFANTRY";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_LastTimeCheckLoadout < ( diag_ticktime - _RandomTickCheckLoadout )"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_this call ODKAI_CheckLoadout;	" \n
+                                         "_this call ODKAI_MinesRoads;			" \n
+                                         "_LastTimeCheckLoadout = diag_ticktime;" \n
+                                         "_RandomTickCheckLoadout = 20 + ( random 10 );"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "LEADER_">*/
+                                class LEADER_
+                                {
+                                        itemno = 9;
+                                        priority = 3.000000;
+                                        to="LEADER";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_IsLeader"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "COMBAT_">*/
+                                class COMBAT_
+                                {
+                                        itemno = 24;
+                                        priority = 2.000000;
+                                        to="COMBAT";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "INSIDE_BUILDING">*/
+                                class INSIDE_BUILDING
+                                {
+                                        itemno = 18;
+                                        priority = 1.000000;
+                                        to="INSIDE__BUILDING";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "LEADER">*/
+                class LEADER
+                {
+                        name = "LEADER";
+                        itemno = 10;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         "_this call ODKAI_MoveinVehicle;" \n
+                         "_this call ODKAI_DeployFoldStatic;" \n
+                         "" \n
+                         "private _CanSee = [ _this , _Enemy ] call ODKAI_CheckVisibility;" \n
+                         "if _CanSee then { " \n
+                         "if ( _this distance2d _Enemy < 500 ) then { " \n
+                         "if ( _Enemy isKindOf ""Man"" ) then {  " \n
+                         "[ _this , _Enemy ] call ODKAI_LaserDesignation;" \n
+                         "		" \n
+                         "};" \n
+                         "};" \n
+                         "};" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "IN_COMBAT_">*/
+                                class IN_COMBAT_
+                                {
+                                        itemno = 15;
+                                        priority = 1.000000;
+                                        to="LEADER_COMBAT__D";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_In_Combat"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "LEADER_COMBAT__D">*/
+                class LEADER_COMBAT__D
+                {
+                        name = "LEADER_COMBAT__D";
+                        itemno = 16;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         "" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "REQUEST_SUPPRESS">*/
+                                class REQUEST_SUPPRESS
+                                {
+                                        itemno = 48;
+                                        priority = 1.000000;
+                                        to="SUPPRES";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "SUPPRESSION">*/
+                class SUPPRESSION
+                {
+                        name = "SUPPRESSION";
+                        itemno = 17;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "INSIDE__BUILDING">*/
+                class INSIDE__BUILDING
+                {
+                        name = "INSIDE__BUILDING";
+                        itemno = 19;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "COMBAT">*/
+                class COMBAT
+                {
+                        name = "COMBAT";
+                        itemno = 25;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         "" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "IN_COMBAT">*/
+                                class IN_COMBAT
+                                {
+                                        itemno = 26;
+                                        priority = 2.000000;
+                                        to="COMBAT";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_LastTimeInCombat < ( diag_ticktime - _RandomTickInCombat )"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"" \n
+                                         "_LastTimeInCombat = diag_ticktime;" \n
+                                         "_RandomTickInCombat = 3 + random 5;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "REQUEST_SUPPRESS">*/
+                                class REQUEST_SUPPRESS
+                                {
+                                        itemno = 22;
+                                        priority = 1.000000;
+                                        to="SUPPRESSION";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"true"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "LAND_VEHICLES">*/
+                class LAND_VEHICLES
+                {
+                        name = "LAND_VEHICLES";
+                        itemno = 27;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 0.2;" \n
+                         "" \n
+                         "_Commander = ( effectiveCommander ( vehicle _this ) ) isEqualTo _this;" \n
+                         "_isDisarmed =  ( ( ( vehicle _this emptyPositions ""gunner"" ) != 0 ) OR ( ( vehicle _this magazinesTurret [ [ 0 ] , false ] ) isEqualTo [] ) );" \n
+                         "[ _this , _isAutonomous , _isDisarmed ] call ODKAI_LandVehicle;" \n
+                         "		"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "COMMANDER_COMBAT">*/
+                                class COMMANDER_COMBAT
+                                {
+                                        itemno = 28;
+                                        priority = 1.000000;
+                                        to="COMBAT_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_Commander AND" \n
+                                         "_In_Combat AND" \n
+                                         "!_isDisarmed"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "COMBAT_1">*/
+                class COMBAT_1
+                {
+                        name = "COMBAT_1";
+                        itemno = 29;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         "[ _this , _Enemy ] call ODKAI_CheckLaserDesignator;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "SUPPRESSION_">*/
+                                class SUPPRESSION_
+                                {
+                                        itemno = 30;
+                                        priority = 1.000000;
+                                        to="SUPPRESSION_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "SUPPRESSION_1">*/
+                class SUPPRESSION_1
+                {
+                        name = "SUPPRESSION_1";
+                        itemno = 31;
+                        init = /*%FSM<STATEINIT""">*/"private _CanSee = [ _this , _Enemy ] call ODKAI_CheckVisibility;" \n
+                         " " \n
+                         "if ( _Enemy isKindOf ""Man"" ) then {  " \n
+                         "_stopTime = 5;" \n
+                         "" \n
+                         "_Building = _Enemy call ODKAI_GetBuilding;" \n
+                         "if !_CanSee then { " \n
+                         "	( vehicle _this ) selectWeapon ""LMG_coax	"";" \n
+                         "	( vehicle _this ) selectWeapon ""LMG_coax_ext"";" \n
+                         "};" \n
+                         "if ( random 100 > 99 ) then { " \n
+                         "	( vehicle _this ) selectWeapon ""cannon_120mm"";" \n
+                         "	( vehicle _this ) selectWeapon ""cannon_120mm_long"";" \n
+                         "	( vehicle _this ) selectWeapon ""cannon_125mm"";" \n
+                         "	( vehicle _this ) selectWeapon ""cannon_125mm_advanced"";" \n
+                         "	( vehicle _this ) selectWeapon ""autocannon_40mm_CTWS"";" \n
+                         "	( vehicle _this ) selectWeapon ""autocannon_40mm_VTOL_01"";" \n
+                         "	( vehicle _this ) selectWeapon ""autocannon_30mm_RCWS"";" \n
+                         "	( vehicle _this ) selectWeapon ""autocannon_30mm_CTWS"";" \n
+                         "	( vehicle _this ) selectWeapon ""autocannon_30mm"";" \n
+                         "" \n
+                         "" \n
+                         "};" \n
+                         "" \n
+                         "if ( _Building distance _Enemy < 75 ) then {" \n
+                         "	( vehicle _this ) selectWeapon ""cannon_120mm"";" \n
+                         "	( vehicle _this ) selectWeapon ""cannon_120mm_long"";" \n
+                         "	( vehicle _this ) selectWeapon ""cannon_125mm"";" \n
+                         "	( vehicle _this ) selectWeapon ""cannon_125mm_advanced"";" \n
+                         "	( vehicle _this ) selectWeapon ""autocannon_40mm_CTWS"";" \n
+                         "	( vehicle _this ) selectWeapon ""autocannon_40mm_VTOL_01"";" \n
+                         "	( vehicle _this ) selectWeapon ""autocannon_30mm_RCWS"";" \n
+                         "	( vehicle _this ) selectWeapon ""autocannon_30mm_CTWS"";" \n
+                         "	( vehicle _this ) selectWeapon ""autocannon_30mm"";" \n
+                         "" \n
+                         "} else {	" \n
+                         "	( vehicle _this ) selectWeapon ""LMG_coax	"";" \n
+                         "	( vehicle _this ) selectWeapon ""LMG_coax_ext"";" \n
+                         "};" \n
+                         "};" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "AIR__VEHICLES">*/
+                class AIR__VEHICLES
+                {
+                        name = "AIR__VEHICLES";
+                        itemno = 32;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         "_Commander = ( effectiveCommander ( vehicle _this ) ) isEqualTo _this;" \n
+                         "_isDisarmed = ( ( getPylonMagazines ( vehicle _this ) ) isEqualTo [] );" \n
+                         "if _Commander then {" \n
+                         "	_this call ODKAI_initializeAirVehicles;" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "COMMANDER_COMBAT">*/
+                                class COMMANDER_COMBAT
+                                {
+                                        itemno = 33;
+                                        priority = 1.000000;
+                                        to="COMBAT_2";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_Commander AND" \n
+                                         "_In_Combat AND" \n
+                                         "!_isDisarmed"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "COMBAT_2">*/
+                class COMBAT_2
+                {
+                        name = "COMBAT_2";
+                        itemno = 34;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         "_Flank = [ group _this , ""Flank"" ] call ODKAI_GetGroupMemory;	" \n
+                         "[ _this , _Enemy ] call ODKAI_CheckAirLaserDesignator;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "SUPPRESSION_">*/
+                                class SUPPRESSION_
+                                {
+                                        itemno = 35;
+                                        priority = 2.000000;
+                                        to="SUPPRESSION_2";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "SUPPRESSION_2">*/
+                class SUPPRESSION_2
+                {
+                        name = "SUPPRESSION_2";
+                        itemno = 36;
+                        init = /*%FSM<STATEINIT""">*/"private _CanSee = [ _this , _Enemy ] call ODKAI_CheckVisibility;" \n
+                         "" \n
+                         "if !_CanSee then {  " \n
+                         "" \n
+                         "if ( _Enemy isKindOf ""Man"" ) then {  " \n
+                         "_stopTime = 10;" \n
+                         "" \n
+                         "_Building = _Enemy call ODKAI_GetBuilding;" \n
+                         "" \n
+                         "if ( random 100 > 95 ) then { " \n
+                         "	( vehicle _this ) fire [""missiles_DAGR"", ""FAR_AI""];" \n
+                         "	( vehicle _this ) fire [""missiles_DAR"", ""FAR_AI""];" \n
+                         "	( vehicle _this ) fire [""rockets_Skyfire"", ""FAR_AI""];" \n
+                         "	( vehicle _this ) fire [""GBU12BombLauncher"", ""LoalAltitude""];" \n
+                         "	( vehicle _this ) fire [""GBU12BombLauncher_Plane_Fighter_03_F"", ""LoalAltitude""];" \n
+                         "	( vehicle _this ) fire [""Bomb_04_Plane_CAS_01_F"", ""LoalAltitude""];" \n
+                         "	( vehicle _this ) fire [""Bomb_03_Plane_CAS_02_F"", ""LoalAltitude""];" \n
+                         "	( vehicle _this ) fire [""Rocket_03_AP_Plane_CAS_02_F"", ""FAR_AI""];" \n
+                         "	( vehicle _this ) fire [""Rocket_03_HE_Plane_CAS_02_F"", ""FAR_AI""];" \n
+                         "	( vehicle _this ) fire [""Rocket_04_AP_Plane_CAS_01_F"", ""FAR_AI""];" \n
+                         "	( vehicle _this ) fire [""Rocket_04_HE_Plane_CAS_01_F"", ""FAR_AI""];" \n
+                         "" \n
+                         "};" \n
+                         "" \n
+                         "" \n
+                         "};" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "NONE">*/
+                class NONE
+                {
+                        name = "NONE";
+                        itemno = 38;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "SUPPRES">*/
+                class SUPPRES
+                {
+                        name = "SUPPRES";
+                        itemno = 49;
+                        init = /*%FSM<STATEINIT""">*/"_stopTime = 1;" \n
+                         "" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="WAITING_TIME";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "____FAKE____">*/
+                class ____FAKE____
+                {
+                        name = "____FAKE____";
+                        itemno = 53;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "FALSE">*/
+                                class FALSE
+                                {
+                                        itemno = 37;
+                                        priority = 1.000000;
+                                        to="NONE";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"false"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="START";
+        finalStates[] =
+        {
+                "FSM_END",
+        };
+};
+/*%FSM</COMPILE>*/

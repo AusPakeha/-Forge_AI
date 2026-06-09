@@ -1,0 +1,1 @@
+call compile preprocessFileLineNumbers ("z\ODKAI\addons\ODKAI\ODK_Debug.sqf");

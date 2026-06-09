@@ -1,0 +1,52 @@
+#include "BIS_AddonInfo.hpp"
+class CfgPatches 
+{
+	class VCOM_AI 
+	{
+		units[] = {};
+		weapons[] = {}; 
+		requiredAddons[] = {};	
+		author[]= {"Genesis and b0s"}; 		
+	};
+};
+
+
+
+class CfgFunctions 
+{
+	#include "vcom\cfgFunctions.hpp"
+};
+
+
+
+
+class CfgRemoteExec
+{
+	// List of script functions allowed to be sent from client via remoteExec
+	class Functions
+	{
+		mode = 2;
+		jip = 1;		
+		
+		class vcm_serverask { allowedTargets = 0;jip = 1; };
+		class VCM_PublicScript { allowedTargets = 0;jip = 1; };
+		class SpawnScript { allowedTargets = 0;jip = 1; };
+		class enableSimulationGlobal { allowedTargets = 0;jip = 1; };
+		class VCM_fnc_KnowAbout { allowedTargets = 0;jip = 1; };	
+		class VCM_fnc_RequestReinforcement { allowedTargets = 2; jip = 0; };
+		class VCM_fnc_ShareContact { allowedTargets = 0; jip = 0; };
+		class VCM_fnc_HearingReveal { allowedTargets = 2; jip = 0; };
+
+	};
+	
+	
+};
+
+class Extended_PreInit_EventHandlers 
+{
+    class VCom_init_event 
+	{
+		preinit = 1;
+        init = "call compile preprocessFileLineNumbers 'vcomai\Vcom\Functions\VCM_Functions\fn_CBASettings.sqf';";
+    };
+};

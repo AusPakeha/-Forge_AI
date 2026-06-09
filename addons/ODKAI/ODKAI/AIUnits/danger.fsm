@@ -1,0 +1,211 @@
+/*%FSM<COMPILE "scriptedFSM.cfg, Danger">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"End",1,250,43.082397,-368.141144,133.082397,-318.141205,0.000000,"End"};
+item1[] = {"START",0,250,-205.306519,-1024.547119,-65.306519,-974.547241,0.000000,"START"};
+item2[] = {"NOTHING",2,250,-180.356384,-810.913940,-90.001709,-739.061584,0.000000,"NOTHING"};
+item3[] = {"TRUE",8,218,-464.874390,-368.592926,-374.874390,-318.592957,0.000000,"TRUE"};
+item4[] = {"TRUE",8,218,-181.022064,-919.192627,-91.022064,-869.192627,0.000000,"TRUE"};
+item5[] = {"INFANTRY",4,218,-351.084045,-732.112183,-213.374573,-642.041382,3.000000,"INFANTRY"};
+item6[] = {"FAST_REACTIONS",2,4346,-346.036469,-559.061768,-223.412994,-480.353119,0.000000,"FAST REACTIONS"};
+item7[] = {"TRUE",8,218,-47.314697,-645.800049,42.685303,-595.800049,0.000000,"TRUE"};
+item8[] = {"NO_VAR",4,218,18.982727,-763.152100,156.691772,-673.081360,5.000000,"NO VAR"};
+link0[] = {1,4};
+link1[] = {2,5};
+link2[] = {2,7};
+link3[] = {2,8};
+link4[] = {3,0};
+link5[] = {4,2};
+link6[] = {5,6};
+link7[] = {6,3};
+link8[] = {7,0};
+link9[] = {8,0};
+globals[] = {0.000000,0,0,0,0,640,480,1,353,6316128,1,-803.920105,31.338104,-135.445740,-1016.935425,542,884,1};
+window[] = {2,-1,-1,-1,-1,962,182,1218,182,3,560};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "Danger";
+        class States
+        {
+                /*%FSM<STATE "End">*/
+                class End
+                {
+                        name = "End";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "START">*/
+                class START
+                {
+                        name = "START";
+                        itemno = 1;
+                        init = /*%FSM<STATEINIT""">*/"private [ ""_priors"" , ""_priorCur"" ];" \n
+                         "" \n
+                         "_priors = [ 3 , 4 , 5 , 1 , 4 , 1 , 1 , 2 , 4 , 1 ];" \n
+                         "" \n
+                         "if ( _dangerCause > 0 ) then { _priorCur = _priors select _dangerCause } else { _priorCur=-1 };" \n
+                         "" \n
+                         "{" \n
+                         "  private [ ""_cause"" ];" \n
+                         "  _cause = _x select 0;" \n
+                         "  if ( ( _priors select _cause ) > _priorCur ) then" \n
+                         "  {" \n
+                         "    _dangerCause = _cause;" \n
+                         "    _dangerPos = _x select 1;" \n
+                         "    _dangerUntil = _x select 2;" \n
+                         "    _dangerCausedBy = _x select 3;" \n
+                         "  }" \n
+                         "} forEach _queue;" \n
+                         "_queue = [];" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="NOTHING";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "NOTHING">*/
+                class NOTHING
+                {
+                        name = "NOTHING";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"/*" \n
+                         "comment ""0  DCEnemyDetected"";" \n
+                         "comment ""1  DCFire"";" \n
+                         "comment ""2  DCHit"";" \n
+                         "comment ""3  DCEnemyNear"";" \n
+                         "comment ""4  DCExplosion"";" \n
+                         "comment ""5  DCDeadBodyGroup"";" \n
+                         "comment ""6  DCDeadBody"";" \n
+                         "comment ""7  DCScream"";" \n
+                         "comment ""8  DCCanFire"";" \n
+                         "comment ""9  DCBulletClose"";" \n
+                         "*/" \n
+                         "[ _this , _dangerCause ] call ODKAI_Danger;" \n
+                         "_checkVARGroup = group _this getvariable ""ODKAI_HashMap"";" \n
+                         "_checkVARUnit = _this getvariable ""ODKAI_HashMapUnit"";" \n
+                         "_Enemy = _this findNearestEnemy getposATL _this;" \n
+                         "_Commander = ( effectiveCommander ( vehicle _this ) ) isEqualTo _this;" \n
+                         "_isLandVehicle = ( typeOf ( vehicle _this ) ) isKindOf ""LandVehicle"";" \n
+                         "_ArmedVehicle = !( ( ( vehicle _this emptyPositions ""gunner"" ) != 0 ) OR ( ( vehicle _this magazinesTurret [ [ 0 ] , false ] ) isEqualTo [] ) );" \n
+                         "_ArmedAirVehicle = !( ( getPylonMagazines ( vehicle _this ) ) isEqualTo [] );"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "NO_VAR">*/
+                                class NO_VAR
+                                {
+                                        itemno = 8;
+                                        priority = 5.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"( isnil ""_checkVARGroup"" ) OR" \n
+                                         "( isnil ""_checkVARUnit"" )"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "INFANTRY">*/
+                                class INFANTRY
+                                {
+                                        itemno = 5;
+                                        priority = 3.000000;
+                                        to="FAST_REACTIONS";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"( isNull objectParent _this ) AND" \n
+                                         "( _dangerCausedBy isEqualto _Enemy ) "/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "FAST_REACTIONS">*/
+                class FAST_REACTIONS
+                {
+                        name = "FAST_REACTIONS";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"private _CanSee = [ _this , _Enemy ] call ODKAI_CheckVisibility;" \n
+                         "" \n
+                         "[ _this , _dangerCausedBy ] call ODKAI_InfantryReaction;" \n
+                         "if ( random 100 > 70 ) then { " \n
+                         "if ( _this distance2d _Enemy < 800 ) then { " \n
+                         "[ _this , _dangerCausedBy ] call ODKAI_InfantryReaction1;" \n
+                         "};" \n
+                         "};" \n
+                         "[ _this , _dangerCausedBy ] call ODKAI_InCombat;" \n
+                         "[ _this , _dangerCausedBy ] call ODKAI_DRONE;" \n
+                         "" \n
+                         "" \n
+                         "" \n
+                         "if ( abs speed _this == 0 ) then {" \n
+                         "if _CanSee then { " \n
+                         "_this call ODKAI_TANK;" \n
+                         "};		" \n
+                         "};" \n
+                         "" \n
+                         "" \n
+                         "" \n
+                         "if ( abs speed _this == 0 ) then {" \n
+                         "if _CanSee then { " \n
+                         "" \n
+                         "[ _this , _dangerCausedBy ] call ODKAI_He40mm;" \n
+                         "		" \n
+                         "};" \n
+                         "};" \n
+                         "" \n
+                         "" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "TRUE">*/
+                                class TRUE
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"TRUE"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="START";
+        finalStates[] =
+        {
+                "End",
+        };
+};
+/*%FSM</COMPILE>*/

@@ -1,0 +1,14 @@
+name = "Forge AI"; // Faction Name
+picture = "mod.paa";
+actionName = "";
+action = "";
+description = "AO";
+logo = "mod.paa";
+logoOver = "mod.paa";
+tooltip = "Forge AI"; // Short Description
+tooltipOwned = "IDSolutions";
+overview = "Forge AI"; // Short Description
+author = "IDSolutions";
+overviewPicture = "mod.paa";
+overviewText = "####";
+overviewFootnote = "";
