@@ -34,7 +34,7 @@ private _pkg = IDS_ForcePackages getOrDefault [_packageType, createHashMap];
 private _composition = _pkg getOrDefault ["Composition", []];
 if (typeName _composition != "ARRAY") exitWith { [[],[]] };
 
-private _groupId = ["GRP"] call IDS_fnc_generateGroupId;
+private _groupId = ["GRP"] call IDS_fnc_generateID;
 private _grp = createGroup [_side, true];
 
 {

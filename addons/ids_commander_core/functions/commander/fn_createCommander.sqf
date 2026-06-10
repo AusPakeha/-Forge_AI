@@ -1,9 +1,12 @@
 /*
-    IDS Commander AI - Create Commander (Version 0.1)
+    IDS Commander AI - Create Commander (Version 0.2)
+
+    Creates a commander entry in `missionNamespace` under `IDS_Commanders`.
 */
 
 params [
-    ["_personality","Aggressive"]
+    ["_personality","AGGRESSIVE"],
+    ["_faction","FAC_OPFOR"]
 ];
 
 if !(call IDS_fnc_isAuthority) exitWith {objNull};
@@ -14,27 +17,36 @@ if (isNil "IDS_Commanders") then {
 
 private _commanderId = ["CMD"] call IDS_fnc_generateUID;
 
-private _commander = createHashMapFromArray
-[
-    ["ID",_commanderId],
-    ["Name","Enemy Commander"],
-    ["Personality",_personality],
-    ["Doctrine",_personality],
-    ["DoctrineData",createHashMap],
+private _commander = createHashMapFromArray [
+    ["ID", _commanderId],
+    ["Name", "Enemy Commander"],
+    ["Faction", _faction],
+    ["Personality", _personality],
+    ["Doctrine", _personality],
+    ["DoctrineData", createHashMap],
 
-    ["Resources",1000],
-    ["Money",0],
-    ["Manpower",500],
+    ["Money", 10000],
+    ["Manpower", 100],
 
-    ["ControlledLocations",[]],
-    ["KnownIntel",[]],
-    ["Operations",[]],
+    // Combat power accounting
+    ["AvailableCombatPower", 0],
+    ["CommittedCombatPower", 0],
 
-    ["ThreatLevel",0],
-    ["Created",serverTime]
+    // Group tracking
+    ["ReserveGroups", []],
+    ["AssignedGroups", []],
+    ["ActiveGroups", []],
+    ["ActiveOperations", []],
+
+    ["ControlledLocations", []],
+    ["KnownIntel", []],
+    ["Operations", []],
+
+    ["ThreatLevel", 0],
+    ["Created", serverTime]
 ];
 
-// Store
+// Store authoritative registry
 IDS_Commanders set [_commanderId, _commander];
 
 _commander

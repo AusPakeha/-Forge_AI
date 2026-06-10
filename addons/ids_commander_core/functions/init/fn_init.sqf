@@ -4,6 +4,8 @@
 
 if !(call IDS_fnc_isAuthority) exitWith {};
 
+[] call IDS_fnc_initIDSystem;
+
 ["Initializing IDS Commander AI"] call IDS_fnc_log;
 
 [] call IDS_fnc_buildWorld;

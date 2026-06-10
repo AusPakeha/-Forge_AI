@@ -12,25 +12,26 @@ if (_saveData isEqualTo createHashMap) exitWith {false};
 
 private _loadedVersion = _saveData getOrDefault ["Version","0.0"];
 
-IDS_Commanders = _saveData getOrDefault ["Commander", createHashMap];
-IDS_WorldDB = _saveData getOrDefault ["WorldDB", createHashMap];
+private _cmds = _saveData getOrDefault ["Commander", createHashMap];
+private _worldDB = _saveData getOrDefault ["WorldDB", createHashMap];
+
+IDS_Commanders = _cmds;
+IDS_WorldDB = _worldDB;
+missionNamespace setVariable ["IDS_Commanders", _cmds, true];
+missionNamespace setVariable ["IDS_WorldDB", _worldDB, true];
+missionNamespace setVariable ["IDS_Locations", (_worldDB getOrDefault ["Locations", createHashMap]), true];
 
 // Ensure doctrine registry exists after load.
 call IDS_fnc_initDoctrineRegistry;
 
-// Doctrine persistence rule: keep stored doctrine unless this is a New Save.
-// Backfill missing doctrine fields for older saves.
 {
     private _commander = _x;
-
     private _doctrineKey = _commander getOrDefault ["Doctrine", objNull];
     if (isNull _doctrineKey) then {
         _doctrineKey = _commander getOrDefault ["Personality","AGGRESSIVE"];
         _commander set ["Doctrine", _doctrineKey];
     };
-
     _commander set ["DoctrineData", (IDS_Doctrines getOrDefault [_doctrineKey, createHashMap])];
-
 } forEach values IDS_Commanders;
 
 // Resume loops after load.

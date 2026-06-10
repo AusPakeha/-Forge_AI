@@ -1,389 +1,444 @@
-Now we move from architecture into implementation.
+This is where I would make a significant architectural adjustment before writing more code.
 
-Before writing `fn_spawnPackage.sqf`, we need a small but important subsystem:
+## Do NOT use Combat Power as the primary force-accounting mechanism
 
-# ID Generation System
+Combat Power is useful for **evaluation**, but it is a poor primary resource for **allocation**.
 
-Do **not** create separate generators for groups, operations, vehicles, commanders, etc.
+A commander doesn't actually own "300 Combat Power".
 
-Instead create a single centralized ID service.
+A commander owns:
 
-This avoids collisions and simplifies save/load.
+```text
+Groups
+Money
+Manpower
+Territory
+```
+
+Combat Power is a derived metric.
 
 ---
 
-# File Structure
+# Revised Commander Architecture
+
+Instead of:
+
+```sqf
+["AvailableCombatPower",300]
+["CommittedCombatPower",100]
+```
+
+use:
+
+```sqf
+["ReserveGroups",[]]
+["AssignedGroups",[]]
+["ActiveOperations",[]]
+```
+
+Then calculate combat power when needed.
+
+This avoids synchronization issues.
+
+---
+
+# Commander Registry Framework
+
+Create:
 
 ```text
-systems/core/
-├── fn_generateID.sqf
-├── fn_initIDSystem.sqf
-└── fn_resetIDSystem.sqf
+systems/commander/
+├── fn_initCommanders.sqf
+├── fn_createCommander.sqf
+├── fn_getCommanderData.sqf
+├── fn_addReserveGroup.sqf
+├── fn_assignGroupToCommanderOperation.sqf
+├── fn_releaseGroupFromOperation.sqf
+├── fn_getCommanderReserveGroups.sqf
+└── fn_calculateCommanderCombatPower.sqf
 ```
 
 ---
 
-# Global State
+# Commander Object Schema
+
+For v0.1:
+
+```sqf
+private _commander = createHashMapFromArray [
+
+    ["ID", "CMD_OPFOR"],
+
+    ["Faction", "OPFOR_CSAT"],
+
+    ["Side", east],
+
+    ["Doctrine", "AGGRESSIVE"],
+
+    ["Money", 10000],
+
+    ["Manpower", 100],
+
+    ["ReserveGroups", []],
+
+    ["AssignedGroups", []],
+
+    ["ActiveOperations", []],
+
+    ["CreatedTime", serverTime]
+];
+```
 
 Stored in:
 
 ```sqf
 missionNamespace setVariable [
-    "IDS_IDCounters",
-    createHashMap
-];
-```
-
-Example:
-
-```sqf
-[
-    ["GRP", 15],
-    ["OP", 4],
-    ["CMD", 2],
-    ["VEH", 8]
-]
-```
-
----
-
-# fn_initIDSystem.sqf
-
-**Purpose**
-
-Initialize counters during framework startup.
-
-**Authority**
-
-Server only.
-
-```sqf
-/*
-    File: fn_initIDSystem.sqf
-
-    Description:
-    Initializes global ID counters.
-
-    Authority:
-    Server Only
-*/
-
-if (!isServer) exitWith {};
-
-private _counters = createHashMapFromArray [
-    ["GRP", 0],
-    ["OP", 0],
-    ["CMD", 0],
-    ["VEH", 0]
-];
-
-missionNamespace setVariable [
-    "IDS_IDCounters",
-    _counters,
+    "IDS_Commanders",
+    createHashMap,
     true
 ];
 ```
 
 ---
 
-# fn_generateID.sqf
-
-**Purpose**
-
-Generate unique framework IDs.
-
-**Input**
-
-```sqf
-"GRP"
-"OP"
-"CMD"
-"VEH"
-```
-
-**Output**
-
-```sqf
-"GRP_000001"
-```
-
----
-
-### Implementation
+# fn_initCommanders.sqf
 
 ```sqf
 /*
-    File: fn_generateID.sqf
-
-    Description:
-    Generates framework-wide unique IDs.
-
-    Parameters:
-    0: STRING - Prefix
-
-    Returns:
-    STRING
-
-    Authority:
-    Server Only
+    File: fn_initCommanders.sqf
 */
 
-params ["_prefix"];
-
-if (!isServer) exitWith {""};
-
-private _counters = missionNamespace getVariable [
-    "IDS_IDCounters",
-    createHashMap
-];
-
-private _current = _counters getOrDefault [
-    _prefix,
-    0
-];
-
-_current = _current + 1;
-
-_counters set [
-    _prefix,
-    _current
-];
+if (!isServer) exitWith {};
 
 missionNamespace setVariable [
-    "IDS_IDCounters",
-    _counters
+    "IDS_Commanders",
+    createHashMap,
+    true
 ];
-
-format [
-    "%1_%2",
-    _prefix,
-    [_current, 6] call CBA_fnc_formatNumber
-]
 ```
 
 ---
 
-# Problem With CBA_fnc_formatNumber
-
-Do **not** actually use that implementation.
-
-`CBA_fnc_formatNumber` is intended for display formatting and may introduce separators depending on configuration.
-
-Instead create a dedicated padding helper.
-
----
-
-# fn_padNumber.sqf
+# fn_createCommander.sqf
 
 ```sqf
 /*
-    File: fn_padNumber.sqf
-
-    Description:
-    Left-pads integer values.
-
-    Example:
-    [15,6] call IDS_fnc_padNumber
-
-    Returns:
-    "000015"
+    Parameters:
+    0: Commander ID
+    1: Faction ID
+    2: Doctrine
 */
 
 params [
-    "_number",
-    "_digits"
+    "_commanderID",
+    "_factionID",
+    "_doctrine"
 ];
 
-private _str = str _number;
+if (!isServer) exitWith {false};
 
-while {(count _str) < _digits} do {
-    _str = "0" + _str;
-};
+private _template =
+[
+    _factionID
+]
+call IDS_fnc_getFactionTemplate;
 
-_str
-```
+private _commander = createHashMapFromArray [
 
----
+    ["ID", _commanderID],
 
-# Revised fn_generateID.sqf
+    ["Faction", _factionID],
 
-```sqf
-params ["_prefix"];
+    ["Side", _template get "Side"],
 
-if (!isServer) exitWith {""};
+    ["Doctrine", _doctrine],
 
-private _counters = missionNamespace getVariable [
-    "IDS_IDCounters",
-    createHashMap
+    ["Money", 10000],
+
+    ["Manpower", 100],
+
+    ["ReserveGroups", []],
+
+    ["AssignedGroups", []],
+
+    ["ActiveOperations", []],
+
+    ["CreatedTime", serverTime]
 ];
 
-private _current = (_counters getOrDefault [_prefix,0]) + 1;
+private _commanders =
+    missionNamespace getVariable [
+        "IDS_Commanders",
+        createHashMap
+    ];
 
-_counters set [_prefix,_current];
+_commanders set [
+    _commanderID,
+    _commander
+];
 
 missionNamespace setVariable [
-    "IDS_IDCounters",
-    _counters
+    "IDS_Commanders",
+    _commanders
 ];
 
-format [
-    "%1_%2",
-    _prefix,
-    [_current,6] call IDS_fnc_padNumber
-]
+true
 ```
 
 ---
 
-# Next Function: fn_registerGroup.sqf
-
-This is the first truly important registry function because every spawned force package must pass through it.
-
-Contract:
+# fn_getCommanderData.sqf
 
 ```sqf
-[
-    _group,
+params ["_commanderID"];
+
+private _commanders =
+    missionNamespace getVariable [
+        "IDS_Commanders",
+        createHashMap
+    ];
+
+_commanders getOrDefault [
     _commanderID,
-    _forcePackage
-] call IDS_fnc_registerGroup;
-```
-
-Returns:
-
-```sqf
-"GRP_000001"
-```
-
-and creates:
-
-```sqf
-IDS_GroupRegistry[
-    "GRP_000001"
+    createHashMap
 ]
 ```
 
 ---
 
-## Proposed Registry Object
+# Reserve Force Registration
 
-For v0.1:
+When a package spawns:
 
-```sqf
-private _groupData = createHashMapFromArray [
+Current flow:
 
-    ["ID", _groupID],
-
-    ["Group", _group],
-
-    ["CommanderID", _commanderID],
-
-    ["OperationID", ""],
-
-    ["Faction", side _group],
-
-    ["ForcePackage", _forcePackage],
-
-    ["Status", "AVAILABLE"],
-
-    ["CombatPower", 100],
-
-    ["PersonnelCount", count units _group],
-
-    ["VehicleCount", 0],
-
-    ["SpawnTime", serverTime],
-
-    ["LastUpdate", serverTime]
-];
+```text
+Spawn Package
+    ↓
+Register Group
 ```
 
-Stored as:
+New flow:
+
+```text
+Spawn Package
+    ↓
+Register Group
+    ↓
+Add To Commander Reserve Pool
+```
+
+---
+
+# fn_addReserveGroup.sqf
 
 ```sqf
-private _registry = missionNamespace getVariable [
-    "IDS_GroupRegistry",
-    createHashMap
+params [
+    "_commanderID",
+    "_groupID"
 ];
 
-_registry set [
-    _groupID,
-    _groupData
+if (!isServer) exitWith {};
+
+private _commander =
+[
+    _commanderID
+]
+call IDS_fnc_getCommanderData;
+
+private _reserve =
+    _commander get "ReserveGroups";
+
+if !(_groupID in _reserve) then {
+
+    _reserve pushBack _groupID;
+};
+
+_commander set [
+    "ReserveGroups",
+    _reserve
 ];
 ```
 
 ---
 
-# Important Correction to Earlier Design
+# Important Improvement To Allocation
 
-I would revise one earlier recommendation:
-
-Do **not** remove engine objects from the runtime registry.
-
-Store them.
-
-Example:
-
-```sqf
-["Group", _group]
-```
-
-is perfectly acceptable **in runtime memory**.
-
-The restriction only applies to:
+Current operation allocation:
 
 ```text
-Save files
-Persistence exports
-Network serialization
+Need Rifle Squad
+        ↓
+Spawn Rifle Squad
 ```
 
-Runtime systems should absolutely store direct references because:
-
-* faster lookups
-* less resolution overhead
-* simpler debugging
-
-For save/load:
-
-```sqf
-IDS_fnc_serializeGroupRegistry
-```
-
-can strip engine references before writing to disk.
+This should change.
 
 ---
 
-# After fn_registerGroup
-
-The next implementation sequence should be:
+# New Allocation Algorithm
 
 ```text
-fn_registerGroup.sqf
-↓
-fn_getGroupData.sqf
-↓
-fn_getAvailableGroups.sqf
-↓
-fn_spawnPackage.sqf
-↓
-fn_createOperation.sqf
+Need Rifle Squad
+        ↓
+Reserve Group Exists?
+        ↓
+YES
+        ↓
+Assign Existing Group
+
+NO
+        ↓
+Spawn New Group
+        ↓
+Assign New Group
 ```
 
-At that point you'll have the first complete path:
+This gives us:
+
+* force reuse
+* operational reserves
+* future reinforcement capability
+* realistic force management
+
+---
+
+# fn_getCommanderReserveGroups.sqf
+
+```sqf
+params ["_commanderID"];
+
+private _commander =
+[
+    _commanderID
+]
+call IDS_fnc_getCommanderData;
+
++(_commander get "ReserveGroups")
+```
+
+Return a copy, not the original array.
+
+---
+
+# Dynamic Combat Power
+
+Now combat power becomes derived.
+
+---
+
+# fn_calculateCommanderCombatPower.sqf
+
+```sqf
+params ["_commanderID"];
+
+private _groups =
+[
+    _commanderID
+]
+call IDS_fnc_getCommanderReserveGroups;
+
+private _power = 0;
+
+{
+    private _groupData =
+    [
+        _x
+    ]
+    call IDS_fnc_getGroupData;
+
+    _power =
+        _power +
+        (_groupData getOrDefault [
+            "CombatPower",
+            0
+        ]);
+
+} forEach _groups;
+
+_power
+```
+
+---
+
+# Why This Matters
+
+Later commander decisions become:
+
+```sqf
+private _availablePower =
+[
+    _commanderID
+]
+call IDS_fnc_calculateCommanderCombatPower;
+```
+
+Then:
+
+```sqf
+if (_availablePower > 200) then {
+
+    createAttackOperation;
+};
+```
+
+instead of maintaining duplicated accounting fields.
+
+---
+
+# Required Refactor To fn_allocateOperationForces
+
+Current:
 
 ```text
-Commander
+Operation
     ↓
-Create CAPTURE Operation
-    ↓
-Request FORCE_RIFLE_SQUAD
-    ↓
-Spawn Squad
-    ↓
-Register Squad
-    ↓
-Assign To Operation
+Spawn Package
 ```
 
-which is the first executable slice of the IDS Commander AI war loop.
+Target:
+
+```text
+Operation
+    ↓
+Check Reserve Pool
+    ↓
+Use Existing Force
+    ↓
+Otherwise Spawn Force
+```
+
+That function becomes the heart of operational force management.
+
+---
+
+# After This Sprint
+
+The framework will have:
+
+```text
+✓ ID System
+✓ Group Registry
+✓ Faction Templates
+✓ Force Packages
+✓ Operations
+✓ Operation Execution
+✓ Commander Registry
+✓ Reserve Forces
+```
+
+At that point the next major system should finally be:
+
+```text
+World Generation
+        ↓
+Location Graph
+        ↓
+Adjacency Network
+        ↓
+Frontline Detection
+```
+
+because then the commander can start making geographically valid strategic decisions rather than selecting arbitrary map locations.
+
+That territory graph is the foundation for the actual strategic AI layer described in the original IDS Commander AI design.

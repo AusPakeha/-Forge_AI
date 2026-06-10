@@ -20,5 +20,18 @@ private _current = missionNamespace getVariable [_counterName, 0];
 _current = _current + 1;
 missionNamespace setVariable [_counterName, _current];
 
-format ["%1_%2", _prefix, str _current]
+private _suffix = str _current;
+if (_current < 10) then {
+    _suffix = format ["000%1", _current];
+} else {
+    if (_current < 100) then {
+        _suffix = format ["00%1", _current];
+    } else {
+        if (_current < 1000) then {
+            _suffix = format ["0%1", _current];
+        };
+    };
+};
+
+format ["%1_%2", _prefix, _suffix]
 

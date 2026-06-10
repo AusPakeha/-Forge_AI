@@ -5,6 +5,7 @@ class IDS
         file = "\ids_commander_core\functions\init";
 
         class init {};
+        class initIDSystem {};
         class startLoops {};
         class isAuthority {};
     };
@@ -17,6 +18,7 @@ class IDS
         class scanLocations {};
         class scanMilitaryLocations {};
         class generateSpawnPoints {};
+        class getLocationData {};
         class buildRoadNetwork {};
     };
 
@@ -37,6 +39,12 @@ class IDS
         class selectCommander {};
         class updateCommander {};
 
+        class initCommanders {};
+        class getCommanderData {};
+        class registerCommanderGroup {};
+        class commitForce {};
+        class releaseForce {};
+
         // Force Allocation System (chat29)
         class fn_forceAllocationPass {};
 
@@ -55,8 +63,23 @@ class IDS
         class spawnForcePackage_v1 {};
         class requestForcePackage_v1 {};
 
+        // Force package and faction helpers (v0.1)
+        class fn_getFactionTemplate {};
+        class fn_registerGroup {};
+        class fn_getGroupData {};
+        class fn_getGroupObject {};
+        class fn_addReserveGroup {};
+        class fn_assignGroupToCommanderOperation {};
+        class fn_releaseGroupFromOperation {};
+        class fn_getCommanderReserveGroups {};
+        class fn_calculateCommanderCombatPower {};
+
         // Group registry helpers (v0.1)
         class fn_groupRegistry_get {};
+        class fn_groupRegistry_getObject {};
+        class fn_groupRegistry_getAvailableGroups {};
+        class fn_groupRegistry_setStatus {};
+        class fn_groupRegistry_assignOperation {};
         class fn_groupRegistry_register {};
         class fn_groupRegistry_unregister {};
     };
@@ -86,6 +109,15 @@ class IDS
 
         class initializeOperations {};
         class updateOperations {};
+
+        class createOperation {};
+        class getOperationData {};
+        class setOperationState {};
+        class planOperation {};
+        class allocateOperationForces {};
+        class stageOperation {};
+        class completeCaptureOperation {};
+        class failOperation {};
 
         class tickOperations {};
         class updateOperation {};
@@ -125,6 +157,9 @@ class IDS
 
         class log {};
         class generateUID {};
+        class generateID {};
+        class padNumber {};
+        class resetIDSystem {};
     };
 };
 

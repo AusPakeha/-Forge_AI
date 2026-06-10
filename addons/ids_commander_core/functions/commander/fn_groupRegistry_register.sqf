@@ -33,14 +33,29 @@ if (typeName _reg != "HASHMAP") then {
     _reg = createHashMap;
 };
 
+private _forcePackage = _group getVariable ["IDS_PackageKey", ""];
+private _faction = side _group;
+private _personnelCount = count units _group;
+private _vehicleCount = 0;
+private _status = "AVAILABLE";
+private _combatPower = 100;
+private _currentTime = serverTime;
+
 // If it exists, overwrite (safe for v0.1 since only authority spawns).
 private _entry = createHashMapFromArray [
     ["ID", _groupId],
     ["Group", _group],
     ["CommanderID", _commanderId],
     ["OperationID", _operationId],
-    ["Alive", true],
-    ["SpawnTime", serverTime]
+    ["Faction", _faction],
+    ["ForcePackage", _forcePackage],
+    ["Status", _status],
+    ["CombatPower", _combatPower],
+    ["PersonnelCount", _personnelCount],
+    ["VehicleCount", _vehicleCount],
+    ["SpawnTime", _currentTime],
+    ["LastUpdate", _currentTime],
+    ["Alive", true]
 ];
 
 _reg set [_groupId, _entry];

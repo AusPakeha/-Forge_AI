@@ -29,6 +29,10 @@ IDS_WorldDB set
     _locationDB
 ];
 
+missionNamespace setVariable ["IDS_WorldDB", IDS_WorldDB, true];
+missionNamespace setVariable ["IDS_Locations", _locationDB, true];
+IDS_Locations = _locationDB;
+
 [
     format
     [
@@ -44,6 +48,8 @@ IDS_WorldDB set
     ] call IDS_fnc_evaluateLocation;
 
 } forEach _locations;
+
+[_locations] call IDS_fnc_initializeOwnership;
 
 // Build frontline/territory graph (chat28.sqf).
 // This must run after IDS_WorldDB "Locations" is populated and evaluated.

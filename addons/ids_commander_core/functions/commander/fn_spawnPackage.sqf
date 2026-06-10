@@ -1,55 +1,83 @@
 /*
-    IDS Commander AI - Spawn Package (Version 1) (chat27.sqf)
+    IDS Commander AI - Spawn Package (v0.1)
 
-    Spawns units from IDS_ForcePackages[packageKey]["Composition"] at _spawnPos.
+    Description:
+    Spawns a force package.
 
-    Params:
-        0: _packageKey (String)
-        1: _spawnPos (Position)
-        2: _side (Side) optional (default: east)
+    Parameters:
+        0: STRING - Package Type
+        1: STRING - Faction ID
+        2: POSITION
+        3: STRING - Commander ID
 
     Returns:
-        group (created group)
+        ARRAY
 */
 
 params [
-    ["_packageKey",""],
+    ["_packageType",""],
+    ["_factionID",""],
     ["_spawnPos", [0,0,0]],
-    ["_side", east],
-    // v0.1 force-framework: commanderID used for registry ownership
     ["_commanderID", ""]
 ];
 
-if !(call IDS_fnc_isAuthority) exitWith {grpNull};
-if (_packageKey isEqualTo "") exitWith {grpNull};
+if (!isServer) exitWith { [[],[]] };
+if (_packageType isEqualTo "") exitWith { [[],[]] };
+if (_factionID isEqualTo "") exitWith { [[],[]] };
+if (_commanderID isEqualTo "") exitWith { [[],[]] };
 
-call IDS_fnc_initForcePackages;
+private _template = [_factionID] call IDS_fnc_getFactionTemplate;
+if (typeName _template != "HASHMAP") exitWith { [[],[]] };
 
-private _pkg = IDS_ForcePackages getOrDefault [_packageKey, createHashMap];
-private _composition = _pkg getOrDefault ["Composition", []];
+private _groupIDs = [];
+private _vehicleIDs = [];
 
-if (typeName _composition != "ARRAY") exitWith {grpNull};
+switch (_packageType) do {
+    case "FORCE_RIFLE_SQUAD": {
+        private _side = _template get "Side";
+        private _group = createGroup [_side, true];
 
-private _grp = createGroup [_side, true];
+        _group createUnit [
+            _template get "Leader",
+            _spawnPos,
+            [],
+            0,
+            "NONE"
+        ];
 
-{
-    private _cls = _x;
-    if (isText _cls && {_cls != ""}) then
-    {
-        _grp createUnit [_cls, _spawnPos, [], 5, "FORM"];
+        _group createUnit [
+            _template get "Autorifleman",
+            _spawnPos,
+            [],
+            0,
+            "NONE"
+        ];
+
+        _group createUnit [
+            _template get "Grenadier",
+            _spawnPos,
+            [],
+            0,
+            "NONE"
+        ];
+
+        for "_i" from 1 to 5 do {
+            _group createUnit [
+                _template get "Rifleman",
+                _spawnPos,
+                [],
+                0,
+                "NONE"
+            ];
+        };
+
+        private _groupID = [_group, _commanderID, _packageType] call IDS_fnc_registerGroup;
+        _groupIDs pushBack _groupID;
     };
-} forEach _composition;
-
-_grp setVariable ["IDS_PackageKey", _packageKey];
-
-// Register group in IDS_GroupRegistry.
-// Contract note: Groups belong to commanders; in v0.1 we only register if commanderID is known.
-if (!(_commanderID isEqualTo "")) then
-{
-    private _groupId = ["GRP"] call IDS_fnc_generateGroupId;
-    _grp setVariable ["IDS_GroupID", _groupId];
-    [_groupId, _grp, _commanderID, ""] call IDS_fnc_groupRegistry_register;
 };
 
-_grp
+[
+    _groupIDs,
+    _vehicleIDs
+]
 
