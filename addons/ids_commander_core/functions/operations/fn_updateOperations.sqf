@@ -11,6 +11,10 @@ params ["_commander"];
 
 private _ops = missionNamespace getVariable ["IDS_Operations", createHashMap];
 
+// Server-authoritative frontline refresh once per operations tick.
+[] call IDS_fnc_updateFrontlines;
+[] call IDS_fnc_updateFrontlineRegions;
+
 {
     private _op = _y;
 
@@ -19,11 +23,6 @@ private _ops = missionNamespace getVariable ["IDS_Operations", createHashMap];
         // Legacy operations default to CAPTURE.
         _op set ["Type","CAPTURE"];
     };
-
-    // Server-authoritative frontline refresh.
-    // v0.1: done per operation update; can be optimized by moving to separate tick later.
-    [] call IDS_fnc_updateFrontlines;
-    [] call IDS_fnc_updateFrontlineRegions;
 
     // Frontline/region focus selection currently happens when generating new targets
     // (operation generation not yet rewritten to use fronts).

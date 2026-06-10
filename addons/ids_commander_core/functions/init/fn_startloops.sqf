@@ -30,51 +30,91 @@ private _getAnyCommander = {
 if !(isNil "IDS_LoopsStarted") exitWith {};
 missionNamespace setVariable ["IDS_LoopsStarted", true];
 
-// Commander loop
-[_commanderTick, _getAnyCommander] spawn
-{
-    params ["_tick", "_getAnyCommander"];
-    while {true} do
+// Commander loop (use CBA handlers when available, fallback to spawn)
+if !(isNil "CBA_fnc_addPerFrameHandler") then {
+    [
+        {
+            private _cmd = call _getAnyCommander;
+            if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateCommander};
+        },
+        _commanderTick
+    ] call CBA_fnc_addPerFrameHandler;
+} else {
+    [_commanderTick, _getAnyCommander] spawn
     {
-        private _cmd = call _getAnyCommander;
-        if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateCommander};
-        sleep _tick;
+        params ["_tick", "_getAnyCommander"];
+        while {true} do
+        {
+            private _cmd = call _getAnyCommander;
+            if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateCommander};
+            sleep _tick;
+        };
     };
 };
 
 // Economy loop
-[_economyTick, _getAnyCommander] spawn
-{
-    params ["_tick", "_getAnyCommander"];
-    while {true} do
+if !(isNil "CBA_fnc_addPerFrameHandler") then {
+    [
+        {
+            private _cmd = call _getAnyCommander;
+            if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateEconomy};
+        },
+        _economyTick
+    ] call CBA_fnc_addPerFrameHandler;
+} else {
+    [_economyTick, _getAnyCommander] spawn
     {
-        private _cmd = call _getAnyCommander;
-        if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateEconomy};
-        sleep _tick;
+        params ["_tick", "_getAnyCommander"];
+        while {true} do
+        {
+            private _cmd = call _getAnyCommander;
+            if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateEconomy};
+            sleep _tick;
+        };
     };
 };
 
 // Intel loop
-[_intelTick, _getAnyCommander] spawn
-{
-    params ["_tick", "_getAnyCommander"];
-    while {true} do
+if !(isNil "CBA_fnc_addPerFrameHandler") then {
+    [
+        {
+            private _cmd = call _getAnyCommander;
+            if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateIntel};
+        },
+        _intelTick
+    ] call CBA_fnc_addPerFrameHandler;
+} else {
+    [_intelTick, _getAnyCommander] spawn
     {
-        private _cmd = call _getAnyCommander;
-        if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateIntel};
-        sleep _tick;
+        params ["_tick", "_getAnyCommander"];
+        while {true} do
+        {
+            private _cmd = call _getAnyCommander;
+            if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateIntel};
+            sleep _tick;
+        };
     };
 };
 
 // Operations loop
-[_operationTick, _getAnyCommander] spawn
-{
-    params ["_tick", "_getAnyCommander"];
-    while {true} do
+if !(isNil "CBA_fnc_addPerFrameHandler") then {
+    [
+        {
+            private _cmd = call _getAnyCommander;
+            if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateOperations};
+        },
+        _operationTick
+    ] call CBA_fnc_addPerFrameHandler;
+} else {
+    [_operationTick, _getAnyCommander] spawn
     {
-        private _cmd = call _getAnyCommander;
-        if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateOperations};
-        sleep _tick;
+        params ["_tick", "_getAnyCommander"];
+        while {true} do
+        {
+            private _cmd = call _getAnyCommander;
+            if !(isNull _cmd) then {[_cmd] call IDS_fnc_updateOperations};
+            sleep _tick;
+        };
     };
 };
 

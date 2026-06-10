@@ -54,3 +54,5 @@ IDS_Locations = _locationDB;
 // Build frontline/territory graph (chat28.sqf).
 // This must run after IDS_WorldDB "Locations" is populated and evaluated.
 [] call IDS_fnc_buildLocationGraph;
+[] call IDS_fnc_updateFrontlines;
+[] call IDS_fnc_updateFrontlineRegions;

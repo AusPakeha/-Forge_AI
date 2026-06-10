@@ -45,11 +45,11 @@ private _scored = [];
     private _frontlineCount = count _locIds;
 
     {
-        private _loc = [_x] call IDS_fnc_getLocationByID;
-        if (isNil "_loc") exitWith {};
+      private _loc = [_x] call IDS_fnc_getLocationData;
+      if (isNull _loc) exitWith {};
 
-        _threat = _threat + (_loc getOrDefault ["ThreatScore",0]);
-        _strategic = _strategic + (_loc getOrDefault ["StrategicValue",0]);
+      _threat = _threat + (_loc getOrDefault ["ThreatScore",0]);
+      _strategic = _strategic + (_loc getOrDefault ["StrategicValue",0]);
     } forEach _locIds;
 
     // Normalize a little to keep consistent magnitude.

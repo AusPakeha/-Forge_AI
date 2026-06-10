@@ -47,6 +47,7 @@ class IDS
 
         // Force Allocation System (chat29)
         class fn_forceAllocationPass {};
+        class fn_generateStrategicOperations {};
 
         // Force Package System (chat27.sqf)
         class initForcePackages {};
@@ -140,7 +141,9 @@ class IDS
         class fn_updateFrontlines {};
         class fn_updateFrontlineRegions {};
         class fn_selectFrontlineFocus {};
+        class fn_scoreStrategicTargets {};
         class fn_getFrontlineTargetPos {};
+        class fn_getLocationByID {};
     };
 
     class Persistence
