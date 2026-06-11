@@ -21,7 +21,7 @@ Use three conceptual layers:
 
 1. **Strategic Layer** (decides what to do)
 2. **Operational Layer** (converts decisions into missions/operations; assigns groups)
-3. **Tactical Layer** (VCOM/ODKAI executes combat; commander monitors results)
+3. **Tactical Layer** (AI executes combat; commander monitors results)
 
 Commander should never execute tactical movement/engagement logic.
 
@@ -65,7 +65,6 @@ Commander framework state should live in `missionNamespace`, for example:
 
 ## 5) Third-party AI integration rule
 
-- **Never modify VCOMAI or ODKAI source code.**
 - Implement **adapter layers**.
 
 Example pattern:
@@ -134,9 +133,6 @@ Strict exclusions for v0.1:
 
 ## 9) Repo / Implementation roadmap (what to build)
 
-Since the repo already contains:
-- `ODKAI/`
-- `VCOMAI/`
 
 Create implementation focus under:
 
@@ -144,8 +140,6 @@ Create implementation focus under:
 IDS_CommanderAI/
   addons/
     ids_commander/
-  ODKAI/
-  VCOMAI/
   docs/
   test_missions/
 ```
